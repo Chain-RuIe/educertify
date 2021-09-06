@@ -3,18 +3,9 @@ import Layout from "../layout/Layout";
 import { Typography, Button, TextField, Paper } from "@material-ui/core";
 
 export default function Verify() {
-  const [date, setDate] = useState("");
-  const [certNo, setCertNo] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [value, setValue] = useState("");
   const onSubmit = () => {
-    // Pass Hash, Certificate number and Educational institute to Blockchain
-    console.log({
-      date,
-      certNo,
-      firstname,
-      lastname,
-    });
+    // Call smart contract
   };
 
   return (
@@ -33,39 +24,10 @@ export default function Verify() {
           </Typography>
           <TextField
             style={{ marginTop: "15px" }}
-            label="First Name"
-            value={firstname}
+            label="Certificate Key"
+            value={value}
             onChange={(e) => {
-              setFirstname(e.target.value);
-            }}
-          />
-          <TextField
-            style={{ marginTop: "15px" }}
-            label="Last Name"
-            value={lastname}
-            onChange={(e) => {
-              setLastname(e.target.value);
-            }}
-          />
-          <TextField
-            style={{ marginTop: "15px" }}
-            label="Certificate Number"
-            value={certNo}
-            onChange={(e) => {
-              setCertNo(e.target.value);
-            }}
-          />
-          <TextField
-            style={{ marginTop: "15px" }}
-            id="date"
-            label="Date of issue"
-            type="datetime-local"
-            value={date}
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-            InputLabelProps={{
-              shrink: true,
+              setValue(e.target.value);
             }}
           />
           <Button
@@ -74,7 +36,7 @@ export default function Verify() {
             style={{ marginTop: "15px" }}
             onClick={onSubmit}
           >
-            Submit
+            Search
           </Button>
         </div>
       </Paper>
