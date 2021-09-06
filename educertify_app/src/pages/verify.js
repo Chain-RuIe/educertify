@@ -1,40 +1,22 @@
 import { useRef, useState } from "react";
 import Layout from "../layout/Layout";
-import {
-  Typography,
-  Button,
-  TextField,
-  Paper,
-  Select,
-  MenuItem,
-  InputLabel,
-} from "@material-ui/core";
-import sha256 from "crypto-js/sha256";
+import { Typography, Button, TextField, Paper } from "@material-ui/core";
 
 export default function Verify() {
-  const [hash, setHash] = useState("");
+  const [date, setDate] = useState("");
   const [certNo, setCertNo] = useState("");
-  const [edu, setEdu] = useState("");
-  const fileUpload = useRef(null);
-  const uploadClick = (e) => {
-    fileUpload.current.click();
-  };
-  const uploaded = (e) => {
-    const fileReader = new FileReader();
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onload = (e) => {
-      setHash(sha256(e.target.result).toString());
-    };
-  };
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const onSubmit = () => {
-    // Verify Blockchain hash with hash from document.
+    // Pass Hash, Certificate number and Educational institute to Blockchain
+    console.log({
+      date,
+      certNo,
+      firstname,
+      lastname,
+    });
   };
-  const certChange = (e) => {
-    setCertNo(e.target.value);
-  };
-  const eduChange = (e) => {
-    setEdu(e.target.value);
-  };
+
   return (
     <Layout>
       <Paper elevation={3}>
@@ -47,35 +29,45 @@ export default function Verify() {
           }}
         >
           <Typography style={{ marginTop: "15px" }} variant="h2" gutterBottom>
-            Verify A Document
+            Document Lookup
           </Typography>
-          <InputLabel id="edu">Educational Institution</InputLabel>
-          <Select
-            variant="outlined"
+          <TextField
             style={{ marginTop: "15px" }}
-            labelId="edu"
-            value={edu}
-            onChange={eduChange}
-          >
-            <MenuItem value={"NUS"}>NUS</MenuItem>
-            <MenuItem value={"NTU"}>NTU</MenuItem>
-            <MenuItem value={"SUTD"}>SUTD</MenuItem>
-            <MenuItem value={"SMU"}>SMU</MenuItem>
-          </Select>
+            label="First Name"
+            value={firstname}
+            onChange={(e) => {
+              setFirstname(e.target.value);
+            }}
+          />
+          <TextField
+            style={{ marginTop: "15px" }}
+            label="Last Name"
+            value={lastname}
+            onChange={(e) => {
+              setLastname(e.target.value);
+            }}
+          />
           <TextField
             style={{ marginTop: "15px" }}
             label="Certificate Number"
             value={certNo}
-            onChange={certChange}
+            onChange={(e) => {
+              setCertNo(e.target.value);
+            }}
           />
-          <div style={{ marginTop: "15px", display: "flex" }}>
-            <Button onClick={uploadClick} variant="outlined" color="primary">
-              Upload PDF
-            </Button>
-            <Typography style={{ marginLeft: "15px" }} variant="body1">
-              {hash}
-            </Typography>
-          </div>
+          <TextField
+            style={{ marginTop: "15px" }}
+            id="date"
+            label="Date of issue"
+            type="datetime-local"
+            value={date}
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
           <Button
             color="primary"
             variant="contained"
@@ -84,12 +76,6 @@ export default function Verify() {
           >
             Submit
           </Button>
-          <input
-            type="file"
-            ref={fileUpload}
-            onChange={uploaded}
-            style={{ display: "none" }}
-          />
         </div>
       </Paper>
     </Layout>
