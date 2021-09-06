@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Layout from "../layout/Layout";
-import styles from "../styles/Home.module.css";
-import { getTaquito } from "../helpers/taquito.js";
+import { Typography } from "@material-ui/core";
 
 export default function Main() {
   const [token, setToken] = useState();
@@ -10,14 +9,11 @@ export default function Main() {
   }, []);
   return (
     <Layout>
-      <div className={styles.container}>Main Page</div>
-      <button
-        onClick={() => {
-          getTaquito(token);
-        }}
-      >
-        Click
-      </button>
+      <Typography variant="h2">Welcome.</Typography>
+      <Typography variant="body1">
+        Upload your wallet and click on the above links - Sign or Verify - to
+        get started.
+      </Typography>
     </Layout>
   );
 }
