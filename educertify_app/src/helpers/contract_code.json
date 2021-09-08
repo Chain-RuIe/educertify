@@ -1,0 +1,292 @@
+[
+  {
+    "prim": "storage",
+    "args": [
+      {
+        "prim": "pair",
+        "args": [
+          {
+            "prim": "pair",
+            "args": [
+              {
+                "prim": "string",
+                "annots": ["%certId"]
+              },
+              {
+                "prim": "string",
+                "annots": ["%date"]
+              }
+            ]
+          },
+          {
+            "prim": "pair",
+            "args": [
+              {
+                "prim": "string",
+                "annots": ["%fName"]
+              },
+              {
+                "prim": "string",
+                "annots": ["%lName"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prim": "parameter",
+    "args": [
+      {
+        "prim": "map",
+        "args": [
+          {
+            "prim": "string"
+          },
+          {
+            "prim": "string"
+          }
+        ],
+        "annots": ["%replace"]
+      }
+    ]
+  },
+  {
+    "prim": "code",
+    "args": [
+      [
+        {
+          "prim": "UNPAIR"
+        },
+        {
+          "prim": "DUP"
+        },
+        {
+          "prim": "DUG",
+          "args": [
+            {
+              "int": "2"
+            }
+          ]
+        },
+        {
+          "prim": "PUSH",
+          "args": [
+            {
+              "prim": "string"
+            },
+            {
+              "string": "fName"
+            }
+          ]
+        },
+        {
+          "prim": "GET"
+        },
+        {
+          "prim": "IF_NONE",
+          "args": [
+            [
+              {
+                "prim": "PUSH",
+                "args": [
+                  {
+                    "prim": "int"
+                  },
+                  {
+                    "int": "24"
+                  }
+                ]
+              },
+              {
+                "prim": "FAILWITH"
+              }
+            ],
+            []
+          ]
+        },
+        {
+          "prim": "UPDATE",
+          "args": [
+            {
+              "int": "3"
+            }
+          ]
+        },
+        {
+          "prim": "SWAP"
+        },
+        {
+          "prim": "DUP"
+        },
+        {
+          "prim": "DUG",
+          "args": [
+            {
+              "int": "2"
+            }
+          ]
+        },
+        {
+          "prim": "PUSH",
+          "args": [
+            {
+              "prim": "string"
+            },
+            {
+              "string": "lName"
+            }
+          ]
+        },
+        {
+          "prim": "GET"
+        },
+        {
+          "prim": "IF_NONE",
+          "args": [
+            [
+              {
+                "prim": "PUSH",
+                "args": [
+                  {
+                    "prim": "int"
+                  },
+                  {
+                    "int": "25"
+                  }
+                ]
+              },
+              {
+                "prim": "FAILWITH"
+              }
+            ],
+            []
+          ]
+        },
+        {
+          "prim": "UPDATE",
+          "args": [
+            {
+              "int": "4"
+            }
+          ]
+        },
+        {
+          "prim": "CDR"
+        },
+        {
+          "prim": "SWAP"
+        },
+        {
+          "prim": "DUP"
+        },
+        {
+          "prim": "DUG",
+          "args": [
+            {
+              "int": "2"
+            }
+          ]
+        },
+        {
+          "prim": "PUSH",
+          "args": [
+            {
+              "prim": "string"
+            },
+            {
+              "string": "date"
+            }
+          ]
+        },
+        {
+          "prim": "GET"
+        },
+        {
+          "prim": "IF_NONE",
+          "args": [
+            [
+              {
+                "prim": "PUSH",
+                "args": [
+                  {
+                    "prim": "int"
+                  },
+                  {
+                    "int": "26"
+                  }
+                ]
+              },
+              {
+                "prim": "FAILWITH"
+              }
+            ],
+            []
+          ]
+        },
+        {
+          "prim": "DIG",
+          "args": [
+            {
+              "int": "2"
+            }
+          ]
+        },
+        {
+          "prim": "PUSH",
+          "args": [
+            {
+              "prim": "string"
+            },
+            {
+              "string": "certId"
+            }
+          ]
+        },
+        {
+          "prim": "GET"
+        },
+        {
+          "prim": "IF_NONE",
+          "args": [
+            [
+              {
+                "prim": "PUSH",
+                "args": [
+                  {
+                    "prim": "int"
+                  },
+                  {
+                    "int": "27"
+                  }
+                ]
+              },
+              {
+                "prim": "FAILWITH"
+              }
+            ],
+            []
+          ]
+        },
+        {
+          "prim": "PAIR"
+        },
+        {
+          "prim": "PAIR"
+        },
+        {
+          "prim": "NIL",
+          "args": [
+            {
+              "prim": "operation"
+            }
+          ]
+        },
+        {
+          "prim": "PAIR"
+        }
+      ]
+    ]
+  }
+]

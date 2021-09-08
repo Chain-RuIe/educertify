@@ -1,12 +1,53 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Layout from "../layout/Layout";
 import { Typography, Button, TextField, Paper } from "@material-ui/core";
+import { getCert } from "../helpers/taquito";
 
 export default function Verify() {
   const [value, setValue] = useState("");
-  const onSubmit = () => {
+  const [data, setData] = useState({
+    fName: "",
+    lName: "",
+    certId: "",
+    date: "",
+  });
+  const onSubmit = async () => {
     // Call smart contract
+    await getCert(value).then((data) => {
+      setData({
+        fName: data.storage.fName,
+        lName: data.storage.lName,
+        certId: data.storage.certId,
+        date: data.storage.date,
+      });
+    });
   };
+  const secondBox =
+    data.certId !== "" ? (
+      <Paper elevation={3}>
+        <div
+          style={{
+            margin: "5px",
+            padding: "30px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="body1" style={{ margin: "5px" }}>
+            First Name: {data.fName}
+          </Typography>
+          <Typography variant="body1" style={{ margin: "5px" }}>
+            Last Name: {data.lName}
+          </Typography>
+          <Typography variant="body1" style={{ margin: "5px" }}>
+            Certificate ID: {data.certId}
+          </Typography>
+          <Typography variant="body1" style={{ margin: "5px" }}>
+            Date: {data.date}
+          </Typography>
+        </div>
+      </Paper>
+    ) : null;
 
   return (
     <Layout>
@@ -40,6 +81,7 @@ export default function Verify() {
           </Button>
         </div>
       </Paper>
+      {secondBox}
     </Layout>
   );
 }

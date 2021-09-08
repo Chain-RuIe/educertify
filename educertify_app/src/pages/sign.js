@@ -1,21 +1,35 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Layout from "../layout/Layout";
 import { Typography, Button, TextField, Paper } from "@material-ui/core";
+import { signCert } from "../helpers/taquito";
 
 export default function Verify() {
   const [date, setDate] = useState("");
   const [certNo, setCertNo] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const [key, setKey] = useState("");
   const onSubmit = () => {
     // Pass Hash, Certificate number and Educational institute to Blockchain
-    console.log({
-      date,
-      certNo,
-      firstname,
-      lastname,
-    });
+    signCert(firstname, lastname, certNo, date, setKey);
   };
+  const secondBox =
+    key !== "" ? (
+      <Paper elevation={3}>
+        <div
+          style={{
+            margin: "5px",
+            padding: "30px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="body1" style={{ margin: "5px" }}>
+            Your Smart Contract's Key is: {key}. Keep it safe.
+          </Typography>
+        </div>
+      </Paper>
+    ) : null;
 
   return (
     <Layout>
@@ -78,6 +92,7 @@ export default function Verify() {
           </Button>
         </div>
       </Paper>
+      {secondBox}
     </Layout>
   );
 }
