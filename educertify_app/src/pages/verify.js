@@ -11,6 +11,8 @@ export default function Verify() {
     certId: "",
     date: "",
   });
+  const [isValid, setIsValid] = useState(false);
+  
   const onSubmit = async () => {
     // Call smart contract
     await getCert(value).then((data) => {
@@ -20,10 +22,11 @@ export default function Verify() {
         certId: data.storage.certId,
         date: data.storage.date,
       });
-    });
+      setIsValid(true);
+    }).catch(err => setIsValid(false));
   };
   const secondBox =
-    data.certId !== "" ? (
+      isValid ? (
       <Paper elevation={3}>
         <div
           style={{
@@ -47,7 +50,22 @@ export default function Verify() {
           </Typography>
         </div>
       </Paper>
-    ) : null;
+    ) : (
+      <Paper elevation={3}>
+        <div
+          style={{
+            margin: "5px",
+            padding: "30px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="body1" style={{ margin: "5px" }}>
+            Certificate key is invalid, certificate does not exist!
+          </Typography>
+        </div>
+      </Paper>
+    );
 
   return (
     <Layout>
